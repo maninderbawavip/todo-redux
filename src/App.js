@@ -1,25 +1,68 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import { connect } from 'react-redux';
 import './App.css';
+import { addTodo, completeTodo, deleteTodo } from './redux/store';
 
-function App() {
+function App(props) {
+
+  const [inputText, SetText] = useState("")
+  // const [todoList, setNewList] = useState([])
+
+  const ADDtodo = () => {
+    // write some logic to add todo
+    // get the value of input field and add it to todolist
+    // const newTodoList = [...todoList, inputText]
+    // setNewList(newTodoList)
+    // SetText("")
+
+    // dispatch an action that adds the todo in the store
+    const action = addTodo(inputText) // returns me the action that is needed to dispatch
+    props.dispatch(action) // { type: "ADD_TODO", data: inputText }
+    SetText("")
+  }
+
+  const CompleteTodo = (id) => {
+    props.dispatch(completeTodo(id))
+  }
+
+  const DeleteTodo = (id) => {
+    props.dispatch(deleteTodo(id))
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div style={{ display: 'flex' }}>
+          <input type="text" value={inputText} onChange={(e) => SetText(e.target.value)} />
+          <button onClick={ADDtodo}> Add Todo </button>
+        </div>
+
+        {props.todoList.map(item => 
+          <div style={{ display: 'flex'}}>
+          
+            {item.completed ? <strike><p>{item.todo}</p></strike> : <p>{item.todo}</p>}
+
+            <button onClick={() => CompleteTodo(item.id)}>Complete</button>
+            <button onClick={() => DeleteTodo(item.id)}>Delete</button>
+          </div>
+        
+        )}
+
       </header>
     </div>
   );
 }
 
-export default App;
+
+// const mapStateToProps = (state) => {
+//   return({
+//     todoList: state
+//   })
+// }
+
+const mapStateToProps = (state) => ({
+  todoList: state
+})
+
+
+export default connect(mapStateToProps)(App);
