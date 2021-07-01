@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
 import { addTodo, completeTodo, deleteTodo } from './redux/store';
+import TodoListItem from './components/TodoListItem';
+import Users from './components/Users';
+
 
 function App(props) {
 
@@ -37,16 +40,13 @@ function App(props) {
           <button onClick={ADDtodo}> Add Todo </button>
         </div>
 
-        {props.todoList.map(item => 
-          <div style={{ display: 'flex'}}>
-          
-            {item.completed ? <strike><p>{item.todo}</p></strike> : <p>{item.todo}</p>}
+        {props.todoList.map(item => <TodoListItem
+                                        item={item}
+                                        CompleteTodo={CompleteTodo}
+                                        DeleteTodo={DeleteTodo} />)}
 
-            <button onClick={() => CompleteTodo(item.id)}>Complete</button>
-            <button onClick={() => DeleteTodo(item.id)}>Delete</button>
-          </div>
-        
-        )}
+
+        <Users />
 
       </header>
     </div>
