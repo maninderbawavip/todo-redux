@@ -5,6 +5,12 @@ import { addTodo, completeTodo, deleteTodo } from './redux/store';
 import TodoListItem from './components/TodoListItem';
 import Users from './components/Users';
 
+// function sum(a,b) {
+//   return a+b;
+// }
+// sum -> 1,2 -> 3
+// sum -> 5,6 -> 11
+// given a specific input if the function produces the same output everytime -- that means it is a pure function
 
 function App(props) {
 
@@ -41,12 +47,9 @@ function App(props) {
         </div>
 
         {props.todoList.map(item => <TodoListItem
-                                        item={item}
-                                        CompleteTodo={CompleteTodo}
-                                        DeleteTodo={DeleteTodo} />)}
-
-
-        <Users />
+          item={item}
+          CompleteTodo={CompleteTodo}
+          DeleteTodo={DeleteTodo} />)}
 
       </header>
     </div>

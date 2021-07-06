@@ -5,9 +5,15 @@ import { createStore } from "redux";
 //     return({ type: "ADD_TODO", data: inputValue }) 
 // }
 
+// if actions are asynchronous // getting the data from server
 export const addTodo = (inputValue) => ({ type: "ADD_TODO", data: inputValue })
 export const completeTodo = (id) => ({ type: "COMPLETE_TODO", data: id })
 export const deleteTodo = (id) => ({ type: "DELETE_TODO", data: id })
+// export const signUp = (data) => (dispatch)=> {
+//     // asynchronous actions -> thunk
+//     // network call
+//     // then give me back response
+// }
 
 const INITIAL_STATE = []
 

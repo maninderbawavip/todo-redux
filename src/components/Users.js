@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Route, Switch, Redirect, Link } from 'react-router-dom';
 
 class Users extends Component {
 
@@ -16,7 +17,11 @@ class Users extends Component {
             return (<div>Please wait Loading the data...</div>)
         }
         return (<div>
-            {this.state.data.map(item => <p key={item.id}>{item.name}</p>)}
+            {this.state.data.map(item =>
+                <Link to={"/users/" + item.id}>
+                    <p key={item.id}>{item.name}</p>
+                </Link>
+            )}
         </div>)
     }
 
@@ -31,18 +36,7 @@ class Users extends Component {
                     loading: false
                 })
             })
-
-
-        // setTimeout(() => {
-        //     this.setState({
-        //         data: [],
-        //         loading: false
-        //     })
-        // }, 5000)
     }
-
-
 }
-
 
 export default Users;
